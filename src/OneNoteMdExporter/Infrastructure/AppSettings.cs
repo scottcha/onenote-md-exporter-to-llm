@@ -100,7 +100,10 @@ namespace alxnbl.OneNoteMdExporter.Infrastructure
         /// </summary>
         public static bool MaxTwoLineBreaksInARow { get; set; } = true;
 
-
+        /// <summary>
+        /// Get and add inline content of http links (if any)
+        /// </summary>
+        public static bool AddHttpLinkContent { get; set; } = true;
         /*
          * Developer Settings
          * */

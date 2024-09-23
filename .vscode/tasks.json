@@ -15,7 +15,17 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": [
+                        "-NoExit",
+                        "-Command",
+                        "$vsPath = & \"${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe\" -property installationpath; Import-Module \"$vsPath/Common7/Tools/Microsoft.VisualStudio.DevShell.dll\"; Enter-VsDevShell -VsInstallPath $vsPath -SkipAutomaticLocation"
+                    ]
+                }
+            }
         },
         {
             "label": "publish",

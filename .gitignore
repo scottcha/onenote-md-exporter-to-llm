@@ -354,3 +354,4 @@ src/OneNoteMdExporter/logs.txt
 src/OneNoteMdExporter/pandoc/pandoc-3.2-windows-x86_64/pandoc-3.2/COPYING.rtf
 src/OneNoteMdExporter/pandoc/pandoc-3.2-windows-x86_64/pandoc-3.2/COPYRIGHT.txt
 src/OneNoteMdExporter/pandoc/pandoc-3.2-windows-x86_64/pandoc-3.2/MANUAL.html
+src/OneNoteMdExporter/Exports/*

@@ -1,6 +1,7 @@
 ﻿using alxnbl.OneNoteMdExporter.Helpers;
 using alxnbl.OneNoteMdExporter.Infrastructure;
 using alxnbl.OneNoteMdExporter.Models;
+using Microsoft.VisualBasic;
 using Serilog;
 using System;
 using System.IO;
@@ -128,11 +129,30 @@ namespace alxnbl.OneNoteMdExporter.Services.Export
         {
             var res = md;
 
+            if (AppSettings.AddHttpLinkContent)
+                md = AddHttpLinkContent(page, md);
+
             if (AppSettings.AddFrontMatterHeader)
                 res = AddFrontMatterHeader(page, md);
 
             return res;
         }
+
+        private string AddHttpLinkContent(Page page, string md)
+        {
+            //first scan the markdown for http links using regex
+            var link = LinkExtractor.ExtractHttpLinks(md);
+
+            //then get the content of each link
+            Log.Information($"Fetching content of {link} in page {page.Title}");
+            var content = HttpContentExtractor.GetHttpContent(link);
+            if (content != null)
+            {
+                md = md.Replace(link, link + "\n\n" + content);
+            }
+            return md;
+        }
+
 
         private static string AddFrontMatterHeader(Page page, string pageMd)
         {
