@@ -8,13 +8,14 @@ public class LinkExtractor
     {
         var httpLinks = new List<string>();
 
-        string pattern = @"https?://[^\s/$.?#].[^\s]*[^)\]}.,;:\s](?<!\.pdf)";
+        string pattern = @"(?:<|\()?((http|https):\/\/[^\s<>\\)]+)(?:>|\))?";
+
 
         var match = Regex.Match(input, pattern);
 
         if (match.Success)
         {
-            return match.Value;
+            return match.Groups[1].Value;
         }
 
         return null;
