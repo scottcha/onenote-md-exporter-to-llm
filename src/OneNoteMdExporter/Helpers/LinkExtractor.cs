@@ -4,20 +4,24 @@ using System.Collections.Generic;
 
 public class LinkExtractor
 {
-    public static string ExtractHttpLinks(string input)
+    public static List<string> ExtractHttpLinks(string input)
     {
         var httpLinks = new List<string>();
-
         string pattern = @"(?:<|\()?((http|https):\/\/[^\s<>\\)]+)(?:>|\))?";
+        var matches = Regex.Matches(input, pattern);
 
-
-        var match = Regex.Match(input, pattern);
-
-        if (match.Success)
+        foreach (Match match in matches)
         {
-            return match.Groups[1].Value;
+            if (httpLinks.Count < 2)
+            {
+                httpLinks.Add(match.Groups[1].Value);
+            }
+            else
+            {
+                break;
+            }
         }
 
-        return null;
-   }
+        return httpLinks;
+    }
 }
